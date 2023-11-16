@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+
+  jobs-api:
+
+    pull_policy: build
+
+    build:
+      context: .
+      dockerfile: src/Services/Jobs/Jobs.Api/Dockerfile
+
+    environment:
+      - RABBITMQ__URI=$JOBS_RABBITMQ_URI
+
+      - ELASTICSEARCH__URI=$ELASTICSEARCH_URI
+      - ELASTICSEARCH__INDEXNAME=$JOBS_ELASTICSEARCH_INDEXNAME
+
+      - CONNECTIONSTRING__DRIVERNAME=$JOBS_CONNECTIONSTRING_DRIVERNAME
+      - CONNECTIONSTRING__CONNECTIONSTRING=$JOBS_CONNECTIONSTRING_CONNECTIONSTRING
+      - CONNECTIONSTRING__TABLEPREFIX=$JOBS_CONNECTIONSTRING_TABLEPREFIX
+
+  coverage:
+
+    profiles:
+      - coverage
+
+    pull_policy: build
+
+    build:
+      context: .
+      dockerfile: ./coverage/Dockerfile
+
+    environment:
+      - SONAR_TOKEN=$SONAR_TOKEN
+      - SONAR_PROJECT=$SONAR_PROJECT
+      - SONAR_HOST=$SONAR_HOST
+      - BRANCH_NAME=$BRANCH_NAME
+      - GIT_COMMIT=$GIT_COMMIT
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    networks:
+      - coverage
+
+networks:
+  coverage:

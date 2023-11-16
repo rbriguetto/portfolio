@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>SmartApps.Jobs</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0"/>
+    <PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.9.3"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../Infraestructure/Data/Infraestructure.Data/Infraestructure.Data.csproj"/>
+    <ProjectReference Include="../../../Infraestructure/Migrations/Infraestructure.Migrations/Infraestructure.Migrations.csproj"/>
+    <ProjectReference Include="../../../Infraestructure/RabbitMq/Infraestructure.RabbitMq/Infraestructure.RabbitMq.csproj"/>
+    <ProjectReference Include="../../../Infraestructure/Elasticsearch/Infraestructure.Elasticsearch/Infraestructure.Elasticsearch.csproj"/>
+    <ProjectReference Include="../../../Infraestructure/Utils/Infraestructure.Utils/Infraestructure.Utils.csproj"/>
+    <ProjectReference Include="../Jobs.Domain/Jobs.Domain.csproj"/>
+    <ProjectReference Include="../Jobs.Application/Jobs.Application.csproj"/>
+  </ItemGroup>
+</Project>
